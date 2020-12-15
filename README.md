@@ -171,12 +171,12 @@ auto.create.topics.enable=false
 
 - Now we have 3 running instances of Apache Brokers. As we run each instance it gets registered with Zoo Keeper.
 
-# Producer on all new broker instances
+##### Producer on all new broker instances
 ```
 .\kafka-console-producer.bat --broker-list localhost:9092, localhost:9093, localhost:9094 --topic test-topic-1
 ```
 
-# Consumer on all new broker instances
+##### Consumer on all new broker instances
 ```
 .\kafka-console-consumer.bat --bootstrap-server localhost:9092, localhost:9093, localhost:9094 --topic test-topic-1 --from-beginning
 ```
