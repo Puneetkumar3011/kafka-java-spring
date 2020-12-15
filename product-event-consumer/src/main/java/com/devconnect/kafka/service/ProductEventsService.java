@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,22 +22,29 @@ public class ProductEventsService {
     @Autowired
     private ProductEventsRepository productEventsRepository;
 
-    public void processProductEvent(ConsumerRecord<Integer,String> consumerRecord) throws JsonProcessingException {
-        ProductEvent productEvent = objectMapper.readValue(consumerRecord.value(), ProductEvent.class);
-        log.info("productEvent : {} ", productEvent);
+    public void processProductEvent(ConsumerRecord<Integer,String> consumerRecord) {
+        try {
+            ProductEvent productEvent = objectMapper.readValue(consumerRecord.value(), ProductEvent.class);
+            log.info("productEvent : {} ", productEvent);
 
-        switch(productEvent.getProductActionType()){
-            case NEW:
-                save(productEvent);
-                break;
-            case UPDATE:
-                validate(productEvent);
-                save(productEvent);
-                break;
-            default:
-                log.info("Invalid Product Event Type");
+            switch (productEvent.getProductActionType()) {
+                case NEW:
+                    save(productEvent);
+                    break;
+                case UPDATE:
+                    validate(productEvent);
+                    save(productEvent);
+                    break;
+                default:
+                    log.info("Invalid Product Event Type");
+            }
+        } catch (JsonProcessingException ex) {
+            throw new RuntimeException(ex.getMessage());
         }
-
+        catch(Exception ex) {
+            /* to test retry and recovery logic, throwing  RecoverableDataAccessException*/
+            throw new RecoverableDataAccessException("Temporary Network Issue");
+        }
     }
 
     private void validate(ProductEvent productEvent) {
