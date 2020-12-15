@@ -299,17 +299,21 @@ kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group c
 kafka-run-class.bat kafka.tools.DumpLogSegments --deep-iteration --files /tmp/kafka-logs/test-topic-0/00000000000000000000.log
 ```
 
-## API detail
- - Local URL to producer:- http://localhost:6061/productevent
- - Input Payload:-
- 
-```
-{
-    "productEventId":0,
-    "productActionType":"NEW",
-    "product":{"productId":0,"productName":"New Product","productDescription":"Kafka Using Spring Boot"}
-}
-```
+</details>
 
-</p>
+# API Details:
+<details>
+<p>
+ 
+ ##### Local URL to producer:- http://localhost:6061/productevent
+ ##### Input Payload:-
+ 
+ ```
+ {
+     "productEventId":0,
+     "productActionType":"NEW",
+     "product":{"productId":0,"productName":"New Product","productDescription":"Kafka Using Spring Boot"}
+ }
+ ```
+ </p>
 </details>
