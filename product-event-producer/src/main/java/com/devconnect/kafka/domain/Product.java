@@ -13,10 +13,11 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 public class Product {
-    @NotNull
     private Integer productId;
+
     @NotBlank
     private String productName;
+
     @NotBlank
     private String productDescription;
 }

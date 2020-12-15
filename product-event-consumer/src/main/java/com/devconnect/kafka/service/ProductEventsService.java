@@ -52,7 +52,12 @@ public class ProductEventsService {
     }
 
     private void save(ProductEvent productEvent) {
-        productEvent.getProduct().setProductEvent(productEvent);
+        Optional<ProductEvent> productEventOptional = productEventsRepository.findById(productEvent.getProductEventId());
+        if(productEventOptional.isPresent()){
+            productEvent.getProduct().setProductEvent(productEventOptional.get());
+        } else {
+            productEvent.getProduct().setProductEvent(productEvent);
+        }
         productEventsRepository.save(productEvent);
         log.info("Persisted the product Event {} ", productEvent);
     }

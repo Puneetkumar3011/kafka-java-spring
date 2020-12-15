@@ -305,15 +305,36 @@ kafka-run-class.bat kafka.tools.DumpLogSegments --deep-iteration --files /tmp/ka
 <details>
 <p>
  
- ##### Local URL to producer:- http://localhost:6061/productevent
- ##### Input Payload:-
+ ##### Local URL to create product: http://localhost:6061/createProduct
+ ##### http request type: POST
+ ##### Input Payload:
  
  ```
  {
      "productEventId":0,
-     "productActionType":"NEW",
      "product":{"productId":0,"productName":"New Product","productDescription":"Kafka Using Spring Boot"}
  }
  ```
+
+ ##### Local URL to create update product: http://localhost:6061/updateProduct
+ ##### http request type: PUT
+ ##### Input Payload:
+ 
+ ```
+ {
+     "productEventId":1,
+     "product":{"productId":1,"productName":"New Product","productDescription":"New Product description"}
+ }
+ ```
+ </p>
+</details>
+
+# H2 Console:
+<details>
+<p>
+ 
+ ##### H2 Console url: http://localhost:6062/h2-console/
+ ##### JDBC URL: jdbc:h2:mem:product-consumer-db
+ 
  </p>
 </details>
