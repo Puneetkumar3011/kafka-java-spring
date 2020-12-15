@@ -12,7 +12,7 @@ spring:
       bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id: library-events-listener-group
+      group-id: product-events-listener-group
   datasource:
     url: jdbc:h2:mem:product-consumer-db
     driver-class-name: org.h2.Driver
