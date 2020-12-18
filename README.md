@@ -124,6 +124,12 @@ auto.create.topics.enable=false (optional. be default its true and when unknown 
 .\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning -property "key.separator= - " --property "print.key=true"
 ```
 
+### To reset kafka group offset to latest
+##### we can use it when there are some error in all previous produced data. After running this command Java applications will start looking for new data dispatched from producer
+```
+.\kafka-consumer-groups.bat --bootstrap-server localhost:9092, localhost:9093, localhost:9094 --group test-topic-listener-group --topic test-topic --reset-offsets --to-latest --execute
+```
+
 ### With Consumer Group
 
 ```
